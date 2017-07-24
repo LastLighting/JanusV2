@@ -1,6 +1,8 @@
 package topprogersgroup.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,19 +18,20 @@ public class Disease {
     private int id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private String disName;
 
-    @Column(name = "dateOfResearch", nullable = false)
+    @Column(name = "dateresearch", nullable = false)
     @Temporal(value= TemporalType.DATE)
-    private Date dateOfResearch;
+    private Date dateResearch;
 
-    @Column(name = "researchMethod", nullable = false)
+    @Column(name = "researchmethod", nullable = false)
     private String researchMethod;
 
     @Column(name = "result", nullable = false)
     private String result;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "quarantine_id")
     private Quarantine quarantine;
+
 }

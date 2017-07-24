@@ -1,13 +1,18 @@
 package topprogersgroup.entity;
 
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
+@ToString
 @Table(name = "passport")
 public class Passport {
 
@@ -16,11 +21,20 @@ public class Passport {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "animalType", nullable = false)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "guid", nullable = false)
+    private String guid;
+
+    @Column(name = "isLast")
+    @Type(type = "boolean")
+    private boolean isLast;
+
+    @Column(name = "animaltype", nullable = false)
     private String animalType;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "petname", nullable = false)
+    private String petName;
 
     //пол
     @Column(name = "gender", nullable = false)
@@ -45,7 +59,7 @@ public class Passport {
     @Column(name = "offspring")
     private String offspring;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
@@ -72,12 +86,16 @@ public class Passport {
     @Temporal(value=TemporalType.DATE)
     private Date dateOfImplantation;
 
-    @Column(name = "passportPhoto", nullable = false)
-    private String passportPhoto;
-
-    @OneToMany(mappedBy = "passport", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "passport", cascade = CascadeType.ALL)
     private List<Vaccination> vaccination;
 
-    @Transient
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "passport", fetch = FetchType.EAGER)
     private Pet pet;
+
+    @OneToMany(mappedBy = "passport")
+    private List<UploadImage> images;
+
+    @Column(name = "isdeleted")
+    @Type(type = "boolean")
+    private boolean isDeleted;
 }

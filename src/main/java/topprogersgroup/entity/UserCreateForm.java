@@ -18,5 +18,5 @@ public class UserCreateForm {
     private String passwordRepeated = "";
 
     @NotNull
-    private Role role = Role.PET_OWNER;
+    private Role role;
 }

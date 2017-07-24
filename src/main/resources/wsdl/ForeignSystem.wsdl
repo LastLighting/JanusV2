@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<wsdl:definitions name="ForeignSystem"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://localhost/services/foreignsystem"
+                  xmlns:tns="http://localhost/services/foreignsystem"
+                  xmlns:types="http://localhost/types/foreignSystem">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://localhost/types/foreignSystem"
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    elementFormDefault="qualified"
+                    attributeFormDefault="unqualified"
+                    version="1.0">
+
+            <xsd:element name="VeterinaryCertificate">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CertificateId" type="xsd:int"/>
+                        <xsd:element name="CertificateNumber" type="xsd:int"/>
+                        <xsd:element name="VeterinaryDocumentNumber" type="xsd:int"/>
+                        <xsd:element name="RegistrationPlace" type="xsd:string"/>
+                        <xsd:element name="IssueDate" type="xsd:date"/>
+                        <xsd:element name="LocalCompetentAuthority" type="xsd:string"/>
+                        <xsd:element name="CentralCompetentAuthority" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="statusFromForeignSystem">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="setVeterinaryCertificateStatusInput">
+        <wsdl:part name="VeterinaryCertificate" element="types:VeterinaryCertificate"/>
+    </wsdl:message>
+
+    <wsdl:message name="setVeterinaryCertificateStatusOutput">
+        <wsdl:part name="statusFromForeignSystem" element="types:statusFromForeignSystem"/>
+    </wsdl:message>
+
+    <wsdl:portType name="ForeignSystem_PortType">
+        <wsdl:operation name="setVeterinaryCertificateStatus">
+            <wsdl:input message="tns:setVeterinaryCertificateStatusInput"/>
+            <wsdl:output message="tns:setVeterinaryCertificateStatusOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="ForeignSystem_SoapBinding" type="tns:ForeignSystem_PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="setVeterinaryCertificateStatus">
+            <soap:operation soapAction="http://localhost/services/foreignsystem/setVeterinaryCertificateStatus"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="ForeignSystem_Service">
+        <wsdl:port name="ForeignSystem_Port" binding="ForeignSystem_SoapBinding">
+            <soap:address location="http://localhost:8080/topprogersgroup/ws/foreignsystem"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

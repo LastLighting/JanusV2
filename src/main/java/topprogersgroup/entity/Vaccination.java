@@ -1,6 +1,7 @@
 package topprogersgroup.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,9 +27,10 @@ public class Vaccination {
     private String seriesOfVaccine;
 
     @Column(name = "validUntil", nullable = false)
+    @Temporal(value=TemporalType.DATE)
     private Date validUntil;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_passport")
     private Passport passport;
 }

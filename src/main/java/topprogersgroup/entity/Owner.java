@@ -1,9 +1,15 @@
 package topprogersgroup.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,33 +17,56 @@ import java.util.Date;
 public class Owner {
 
     @Id
-    @Column(name = "numberAndSeriesOfPassport", unique = true, nullable = false)
-    private String numberAndSeriesOfPassport;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private int id;
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "documentnumber", unique = true, nullable = false)
+    @NotNull
+    @Size(min = 2, max = 30, message = "")
+    private String documentNumber;
+
+    @Column(name = "firstname", nullable = false)
+    @NotNull
+    @Size(min = 2, max = 30, message = "")
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "lastname", nullable = false)
+    @NotNull
+    @Size(min = 2, max = 30, message = "")
     private String lastName;
 
-    //отчество
-    @Column(name = "patronymic", nullable = false)
-    private String patronymic;
+    @Column(name = "middlename", nullable = false)
+    @NotNull
+    @Size(min = 2, max = 30, message = "")
+    private String middleName;
 
-    @Column(name = "gender", nullable = false)
-    private boolean gender;
-
-    @Column(name = "dateOfBirth", nullable = false)
+    @Column(name = "birthdate", nullable = false)
     @Temporal(value=TemporalType.DATE)
-    private Date dateOfBirth;
+//    @NotNull
+    private Date birthdate;
 
-    @Column(name = "phoneNumber", nullable = false)
+    @Column(name = "phonenumber")
+    @NotNull
+    @Size(min = 4, max = 11, message = "")
     private String phoneNumber;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @Column(name = "address", nullable = false)
+    @NotNull
+    @Size(min = 2, max = 255, message = "")
+    private String address;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Passport passport;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Passport> passport;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Pet> pet;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "isdeleted")
+    @Type(type = "boolean")
+    private boolean isDeleted;
 }

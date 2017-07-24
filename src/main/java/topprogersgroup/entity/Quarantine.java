@@ -1,6 +1,7 @@
 package topprogersgroup.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,10 +22,16 @@ public class Quarantine {
     @Column(name = "numberOfDays", nullable = false)
     private int numberOfDays;
 
-    @OneToOne
-    @JoinColumn(name = "addressOfLaboratory")
-    private Address addressOfLaboratory;
+    @Column(name = "addressLaboratory")
+    private String addressOfLaboratory;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quarantine")
-    List<Disease> diseases;
+    private List<Disease> diseases;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quarantine", fetch = FetchType.EAGER)
+    private Pet pet;
+
+    @Column(name = "isdeleted")
+    @Type(type = "boolean")
+    private boolean isDeleted;
 }

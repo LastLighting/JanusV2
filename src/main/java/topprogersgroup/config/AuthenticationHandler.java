@@ -31,14 +31,14 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
             }
             else if(authority.getAuthority().equals("PET_OWNER")) {
                 try {
-                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/office/home");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             else if(authority.getAuthority().equals("EMPLOYEE")) {
                 try {
-                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/employee/home");
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/docs/home");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

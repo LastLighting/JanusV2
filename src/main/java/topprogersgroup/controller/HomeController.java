@@ -10,4 +10,9 @@ public class HomeController {
     public String getHomePage() {
         return "home";
     }
+
+    @RequestMapping(value = "/403")
+    public String getAccessDeniedPage() {
+        return "403";
+    }
 }

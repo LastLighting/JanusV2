@@ -4,7 +4,11 @@
     color: #343434;
 !important;
 }
-
+.error{
+    margin-top: 2%;
+    font-family: cursive;
+    color: #ff4522;
+}
 .btn {
     background-color: #241A00;
 !important
@@ -36,7 +40,9 @@ img {
     max-width: 100%;
     display: table;
 }
-
+select {
+    display: inline-block;!important;
+}
 .picbackground {
     background: #403000;
 }
@@ -78,4 +84,16 @@ img {
         max-width: 70%;
         margin-right: 0;
     }
+}
+.select-wrapper{
+    display: inline-block;
+    width: 20%;
+    float: right;
+}
+.select-wrapper input.select-dropdown{
+    display: none; !important;
+}
+
+.caret{
+    display: none; !important;
 }

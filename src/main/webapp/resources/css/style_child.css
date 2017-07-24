@@ -1,0 +1,76 @@
+.center-block{
+    width: 75%;
+}
+.header-color {
+    background-color: #E8B51B;
+!important;
+    color: #343434;
+!important;
+}
+.block-top{
+    margin-bottom: 3%;
+    margin-top: 2%;
+}
+.footer{
+    background-color: #403000;
+}
+select {
+    display: inline-block;!important;
+}
+footer{
+    flex:1;
+    width: 100%;
+    height: 10%;
+    background-color:white;
+}
+.main_block{
+    flex:0;
+    min-height: 80%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+.hide_template {
+    display: none; !important;
+}
+.error{
+    margin-top: 2%;
+    font-family: cursive;
+    color: #ff4522;
+}
+.btn-block{
+    margin-top: 5%;
+}
+.template-block{
+    margin-top: 1%;
+}
+.select-wrapper{
+    display: inline-block;
+    width: 20%;
+    float: right;
+}
+.select-wrapper input.select-dropdown{
+    display: none; !important;
+}
+
+.caret{
+    display: none; !important;
+}
+.header-margin{
+     margin-bottom: 5%;
+}
+.header-margin2{
+    margin-bottom: 2%;
+}
+.card.table{
+    padding: 5% 5%;
+}
+.picture-block{
+    margin-left: 5%;
+}
+.center{
+    margin-left:15%;
+    margin-right: auto;
+    width:80%
+}
